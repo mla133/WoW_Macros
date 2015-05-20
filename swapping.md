@@ -45,5 +45,5 @@
 * Note: You might find yourself in a situation where you have two offhand weapons with the same name but different poisons on them and you want to switch between them quickly. Or perhaps you just want to alternate between two offhand weapons with just one hotkey.
 Keep your alternate dagger in the sixteenth slot (lower right corner) of your main (rightmost) backpack.
 The number 17 refers to your offhand weapon slot. #showtooltip makes the macro's icon and tooltip display the icon of the equipped weapon, or hold down a modifier key (say Alt) and it will display the icon of the weapon that's ready to be switched in.
-*Works in 3.2.2
+* Works in 3.2.2
 
