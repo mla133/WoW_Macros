@@ -35,7 +35,7 @@ Categorized list of generally useful custom macros.
 * Use: This macro will switch your talent spec and put you into the respective gear and stance.
 
 ##Swap Equipment and Stance 2
-``
+```
 #show [spec:1] <Secondary Stance>; [spec:2] <Primary Stance> 
 /usetalents [button:1,spec:1] 2; [button:1,spec:2] 1 
 /equipset [button:2,spec:1] <Primary Set Name>; [button:2,spec:2] <Secondary Set Name> 
@@ -45,7 +45,7 @@ Categorized list of generally useful custom macros.
 * Use: Here is an alternate version for fury warriors that cannot use the above macro due to Titan's Grip.
 * Note: Left click swaps the talent spec, right click swaps gear and stance.
 
-# One Button Spec, Stance, Equipment
+##One Button Spec, Stance, Equipment
 ```
 /cast [stance:3] Defensive Stance; [Stance:1] Berserker Stance
 /usetalents [spec:1] 2; [spec:2] 1
