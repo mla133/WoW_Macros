@@ -99,172 +99,108 @@ For people who play without sound to begin with, these macro will -enable your s
 If you're running low on characters and you're using this for a trinket, you can replace the use command with "use 13" (for upper trinket) or "use 14" (for lower trinket).
 * Works in 4.2
 
-Training and Leveling
-Tank check avoid, dist to def-cap
-Tanks: Check unhittability, avoidance, and dist to hard-defcap
-
+#Training and Leveling
+##Tanks: Check unhittability, avoidance, and dist to hard-defcap
+```
 /run local b,d,p,r,a=GetBlockChance(),GetDodgeChance(),GetParryChance(),GetCombatRating(CR_DEFENSE_SKILL) a=1/(.0625+.956/(r/122.9625)) ChatFrame1:AddMessage(format("Unhittable: %.2f%%  Avoidance: %.2f%%  Defense %+.0f rating",b+d+p+5+a,d+p+5+a,r-689))
-*Use Check unhittability and avoidance (+ how far away hard-defcap).
-Trading, Bags and Money
-Print money & currency to chat
-Print Money and Currencies to Chat Frame
+```
 
+* Use Check unhittability and avoidance (+ how far away hard-defcap).
+
+#Trading, Bags and Money
+##Print Money and Currencies to Chat Frame
+```
 /script local cu = GetMoney(); print(GetCoinTextureString(cu,"12"))
 /stopmacro [btn:1]
 /script yy = GetNumWatchedTokens(); for xx = 1, yy,1 do aa, bb, cc, dd, ee = GetBackpackCurrencyInfo(xx); print(bb, aa) end
-Left click to display your total money in the chat window.
-Click any other way to display your money and all your watched currencies.
-Works in 3.3.2
+```
 
-Sell all grey items
+* Use: Left click to display your total money in the chat window.
+* Click any other way to display your money and all your watched currencies.
+* Works in 3.3.2
+
+##Sell all grey items
+```
 /run local c,i,n,v=0;for b=0,4 do for s=1,GetContainerNumSlots(b)do i={GetContainerItemInfo(b,s)}n=i[7]if n and string.find(n,"9d9d9d")then v={GetItemInfo(n)}q=i[2]c=c+v[11]*q;UseContainerItem(b,s)print(n,q)end;end;end;print(GetCoinText(c))
-Use: sells all grey items, shows what was sold and how much money was made from selling
-Works in 4.0.3a
+```
 
-Destroy all grey items
+* Use: sells all grey items, shows what was sold and how much money was made from selling
+* Works in 4.0.3a
+
+##Destroy all grey items
+```
 /run local i,n=0;for b=0,4 do for s=1,GetContainerNumSlots(b) do ClearCursor();i={GetContainerItemInfo(b,s)};n=i[7];if n and string.find(n,"9d9d9d") then PickupContainerItem(b,s); DeleteCursorItem() end end end
-Use: destroy all grey items without confirmation
-Works in 4.0.6
+```
 
-Item Link
+* Use: destroy all grey items without confirmation
+* Works in 4.0.6
+
+##Item Link
+```
 /run local s={"10000"} for i=1,#s do DEFAULT_CHAT_FRAME:AddMessage("\124c00ffffff\Item Link: \124c00FF0033\124Hitem:"..s[i]..":0:0:0:0:0:0:0:0\124h[ID: "..s[i].."]\124h\124r\124c00ffffff - Click ID for item info.")end
-Use: Displays an item link in the default chat frame.
+```
+
+* Use: Displays an item link in the default chat frame.
 Replace "10000" with the desired item ID #.
-Works in 3.3.2
+* Works in 3.3.2
 
-Spell Link
+##Spell Link
+```
 /run local s={"10000"} for i=1,#s do DEFAULT_CHAT_FRAME:AddMessage("\124c00ffffff\Spell Link: \124c00ff0033\[ID: "..s[i].."] \124c00ffffff\- "..GetSpellLink(""..s[i])..".")end
-Use: Displays a spell link in the default chat frame.
+```
+
+* Use: Displays a spell link in the default chat frame.
 Replace "10000" with the desired spell ID #.
-Works in 3.3.2
+* Works in 3.3.2
 
-Professions
-Link professions in trade
-Link your professions in the trade channel
+#Professions
+##Link your professions in the trade channel
 
-Link a single profession
-/script CastSpellByName(#prof#);SendChatMessage("I'll create items against mats, look out: "..GetTradeSkillListLink(),"CHANNEL",nil,GetChannelName("Trade - City"));CloseTradeSkill();
-This macro sends a link with your Profession recipes to a Channel.
-
-Replace #prof# with your profession. If your Profession is Engineering, then write:
-
+##Link a single profession
+```
 /script CastSpellByName("Engineering");SendChatMessage("I'll create items against mats, look out: "..GetTradeSkillListLink(),"CHANNEL",nil,GetChannelName("Trade - City"));CloseTradeSkill();
-Link two professions
-One button to link both of your professions to trade chat and guild chat. Just replace "Inscription" and "Enchanting" with your two professions. Also, trade chat is not necessarily always your number 2 channel. Make sure you check it and adjust accordingly. Replace channel with guild to link it to your guild, or raid to link to raid chat.
+```
 
+##Link two professions
+One button to link both of your professions to trade chat and guild chat. Just replace "Inscription" and "Enchanting" with your two professions. Also, trade chat is not necessarily always your number 2 channel. Make sure you check it and adjust accordingly. Replace channel with guild to link it to your guild, or raid to link to raid chat.
+```
 /cast Inscription
 /run SendChatMessage("Free with your mats "..GetTradeSkillListLink(), "channel", nil, "2")
 /cast Enchanting
 /run SendChatMessage(GetTradeSkillListLink().." I'll even give you 5g if I skill up!", "channel", nil, "2") CloseTradeSkill()
+```
 
-One-button disenchant/mill/prospect
-One-Button Disenchant/Milling/Prospecting
-
+##One-Button Disenchant/Milling/Prospecting
+```
 #showtooltip
 /use [nomod] Disenchant; [mod:alt] Milling;
+```
+
 You can of course change the order, skill and modifier to suit your needs
 
-AIO Profession Button
+##AIO Profession Button
+```
 #showtooltip [nomod] Enchanting; [mod:alt] Inscription; [mod:ctrl] Cooking;[mod:shift] First Aid;
- /use [nomod] Enchanting; [mod:alt] Inscription; [mod:ctrl] Cooking; [mod:shift] First Aid;
+/use [nomod] Enchanting; [mod:alt] Inscription; [mod:ctrl] Cooking; [mod:shift] First Aid;
+```
+
 You can of course change the order, skill and modifier to suit your needs
 
-Fishing
-Fishing w/ weather-beaten fishing hat
-Fishing with your Weather-Beaten Fishing Hat
-
-#showtooltip fishing
-/equip Weather-Beaten Fishing Hat;
-/equip Mastercraft Kalu'ak Fishing Pole;
-/use Weather-Beaten Fishing Hat
-/run UIErrorsFrame:Clear()
-/cast fishing
-This macro will equip your fishing pole and Weather-Beaten Fishing Hat, attach lure and start fishing just by repeatedly clicking the button. One-button fishing never was easier.
-Change the name of your fishing pole if you are not exalted with the Tuskar yet.
-Works in 4.3.4
-
-Fishing equipset w/ error supp
-Fishing using Equipset with Error Sound/Text suppression
-
-#showtooltip fishing
-/run sfx=GetCVar("Sound_EnableSFX");
-/console Sound_EnableSFX 0
-/equipset [noequipped:Fishing Pole, nomod] Fish!;
-/use 1
-/use [equipped:Fishing Pole, nomod] Fishing
-/run UIErrorsFrame:Clear()
-/run SetCVar("Sound_EnableSFX",sfx);
-Use: Equips fishing gear, uses item in head slot, and casts Fishing but suppresses error text/sound and ignores Equipset soundFX on repeated execution while allowing normal fishing soundFX.
-This macro will equip a set named "Fish!".
-You must create the equipment set, which can include all your fishing gear, especially Weather-Beaten Fishing Hat.
-If you want to use a name other than "Fish!", choose a set name that is 11 characters or less (255 limit).
-Drag the new macro button to an available slot and click to cast your line.
-Works in 5.0.4
-Equip Set With Find Fish Toggle
-/equipset [equipped:Fishing Poles] 1; Fishing
-/run SetTracking(1,false)
-/stopmacro [equipped:Fishing Poles]
-/run SetTracking(1,true)
-Equips your "Fishing" set if you don't have a pole equipped and enables fish tracking, or equips set 1 if you do have a pole equipped and disables Find Fish.
-The tracking toggle is set up for the first item in the tracking drop down menu. If Find Fish is the 2nd or 3rd item on the drop down, you will need to change the 1, to 2 or 3.
-Useful if you're a miner/herbalist and you don't want to confuse fish with Firebloom.
-Works with v4.0.3
-Modifier Swap
-#showtooltip
-/cast [nomod] Fishing
-/equip [noequipped:Fishing Poles, mod] Nat Pagle's Extreme Angler FC-5000
-/equip [equipped:Fishing Poles, mod] Titansteel Guardian
-/equip [equipped:Fishing Poles, mod] Matriarch's Spawn
-Credit: Xaeros of Shadowmoon
-Use:(Make sure to replace the fishing pole/weapons with your own)
-On click, you will attempt to cast fishing.
-On mod+click you will switch between your fishing pole and your weapon(s).
-Works in 3.3.3a
-Set Swap
-/equipset [noequipped:Fishing Pole, mod] Fishing; [noequipped:Fishing Pole, nomod, spec:1] [mod, spec:1] Set1; [noequipped:Fishing Pole, nomod, spec:2] [mod, spec:2] Set2
-/use [equipped:Fishing Pole, nomod] Fishing
-Uses the Blizzard Equipment Manager
-Requires one set called Fishing that contains your fishing pole and any equipment you want to wear while fishing (fishing hat, gloves or similar) and two sets that fit your specs (replace Set1 and Set2 with your names)
-If your fishing set is equipped, click will cast Fishing, mod-click will equip the set fitting your current spec. Otherwise, mod-click will equip your fishing set, normal click will equip the spec-relevant set.
-
-Alternate version for toons with just one spec or equipment set:
-
-/equipset [noequipped:Fishing Pole, mod] Fishing;  [noequipped:Fishing Pole, nomod] [mod] Set1
-/use [equipped:Fishing Pole, nomod] Fishing
-Auto equip manager fishing
-Automated Equipment Manager Fishing & Lure Macro
-
-/equipset [noequipped:Fishing Poles, nomod] Fishing
-/cast [equipped:Fishing Poles, nomod] Fishing
-/use [mod:shift] Bright Baubles
-/use [mod:shift] 16
-/equipset [mod:alt] Normal
-/equipset [mod:ctrl] DPS
-Credit: Taurolyon of Sargeras-US --Taurolyon (talk) 15:53, October 14, 2009 (UTC)
-To use:
-Create a Fishing outfit in your equipment manager (or if you use the Outfitter Addon, save the outfit to server)
-Outfit must be named Fishing
-Create a Normal outfit for your primary spec
-Create a DPS outfit for your secondary spec (or remove the last line in the macro if you only have one set of gear/spec)
-If you don't have your fishing pole equipped, it will automatically equip your "Fishing" outfit from your equipment manager
-Clicking on this macro after your fishing pole is equipped, will automatically cast your line and start fishing.
-Shift-Clicking on this macro will apply a lure to your equipped fishing pole (Change Bright Baubles to any lure you'd like. I.E. Weather-Beaten Fishing Hat)
-Alt-Clicking on this macro will equip your Normal set of gear.
-Ctrl-Clicking on this macro will equip your DPS set of gear.
-Binding this macro to a button on your mouse will allow for easy one handed casting and reeling. --Taurolyon (talk) 15:53, October 14, 2009 (UTC)
-
-Multi Gathering Macro
+##Multi Gathering Macro
+```
 #showtooltip
 /cast [nomodifier] <Mount of your choice>
 /cast [modifier:ctrl] Find Minerals
 /cast [modifier:shift] Find Herbs
 /cast [modifier:alt] Smelting
+```
+
 Can of course be modified to your liking and professions
 
-Not holding down a button: Will summon a mount of your choice (Note:<Mount of your choice> has to be swapped with a mount in your possession).
-Holding down ctrl: Will make mining nodes appear on your minimap.
-Holding down shift: Will make herb nodes appear on your minimap.
-Holding down alt: Will show the Smelting pane, where you can smelt your ore bars.
+* Not holding down a button: Will summon a mount of your choice (Note:<Mount of your choice> has to be swapped with a mount in your possession).
+* Holding down ctrl: Will make mining nodes appear on your minimap.
+* Holding down shift: Will make herb nodes appear on your minimap.
+* Holding down alt: Will show the Smelting pane, where you can smelt your ore bars.
 
 ##Enchant to Vellum Macro
 ```
