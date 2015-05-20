@@ -1,1 +1,0 @@
-/run ShowCloak(not ShowingCloak())

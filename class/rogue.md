@@ -81,6 +81,7 @@ Shows Kidney Shot if in spec 2 (PvP), Evisc in other spec and not grouped, and E
 In spec 2 casts Evisc, then KS, but resets to Evisc after 6 seconds (in case KS is on cd). In spec 1 if not grouped and in combat casts Evisc. In spec 1 if grouped (party or raid) and in combat, casts Envenom
 This works really well with a 5-button mouse also. Use Spellbinder to bind the macro to Button 5, then when you need to do your finisher, hit button 5 once, then back to button 4.
 
+##Vanish
 ```
 #showtooltip Vanish
 /cast [combat] Cloak of Shadows; !Stealth
@@ -90,6 +91,8 @@ This works really well with a 5-button mouse also. Use Spellbinder to bind the m
 This macro will put you in stealth if not in combat, if in combat and cloak of shadows and vanish are not on cd it will cast both, if only one is up it will cast which ever is up, it will also show you if vanish is up so be aware if your in combat and vanish isnt up you dont want to hit this or you will most likely waste your cos which has a shorter cd then vanish
 Hitting the button twice wont pull you out of stealth
 This new version will cast your shadow walk when clicked if in stealth, helpful when sneaking up on hunters.
+
+#Killing Spree
 
 ```
 #showtooltip Killing Spree
