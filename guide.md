@@ -44,6 +44,29 @@ Example with conditionals:
 ```
 #showtooltip [nomod] Flash of Light; [mod:shift] Balanced Heartseeker
 ```
+##`/castsequence macros
+Syntax:
+```
+/castsequence [conditionals] resetparameter <spell>, <spell>, <spell>
+```
+A cast sequence macro always loops until it hits the `resetparameter`.  It can be a number of seconds since the last time you clicked the macro, switch targets, leave combat, or press a modifier.
+```
+/castsequence reset=10 spell, spell, spell
+```
+You can also have multiple resets like this:
+```
+/castsequenc reset=10/target/combat spell, spell, spell
+```
+##Mouseover macros
+```
+/cast [@mouseover] <spell>
+```
+Here is one with more conditionals:
+```
+/cast [@mouseover, exists, harm] <spell>; [@target, exists] <spell>
+```
+This one will cast the spell at your mouseover target IF it exists and is a harmful target.  If not, then it proceeds to the next set of conditionals and spells.
+Please note that you need to include the "exists" or "harm" conditionals if you want the spell to return FALSE and move on to the next step.
 
 ##Macro Conditionals
 | Macro Conditional 	| Syntax | Notes |
