@@ -23,6 +23,28 @@ Stringing multiple conditions together like this:
 ```
 This macro will first look to cast `<spell>` at your focus, if that fails, then it casts it on yourself.
 
+##`#showtooltip` examples
+Proper syntax:
+```
+#showtooltip [conditionals] thingtoshow; [conditionals] thingtoshow
+```
+Spell Example:
+```
+#showtooltip Flash of Light
+```
+Item Example:
+```
+#showtooltip Balanced Heartseeker
+```
+Item in backpack in a specific location of your bag (bagid 0):
+```
+#showtooltip 0 4
+```
+Example with conditionals:
+```
+#showtooltip [nomod] Flash of Light; [mod:shift] Balanced Heartseeker
+```
+
 ##Macro Conditionals
 | Macro Conditional 	| Syntax | Notes |
 | -----------------	| ------ | ----- |
