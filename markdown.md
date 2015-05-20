@@ -100,4 +100,20 @@ This is [an example](http://www.slate.com/ "Title") inline link.
 | Monday  | pasta   | $6    |
 | Tuesday | chicken | $8    |
 
-
+# Backslash Escapes
+Certain characters can be escaped with a preceding backslash to preserve the literal display of a character instead of its special Markdown meaning. This applies to the following characters:
+```
+\  backslash
+`  backtick
+*  asterisk
+_  underscore
+{} curly braces
+[] square brackets
+() parentheses
+#  hash mark
+>  greater than
++  plus sign
+-  minus sign (hyphen)
+.  dot
+!  exclamation mark
+```
