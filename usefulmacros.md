@@ -5,7 +5,7 @@ Categorized list of generally useful custom macros.
 ```
 /run px,py=GetPlayerMapPosition("player"); DEFAULT_CHAT_FRAME:AddMessage(format("You are at: %s (%0.1f, %0.1f)",GetZoneText(),px*100,py*100));
 ```
-*Use: This macro will display in your chat frame your current map coordinates with one decimal place precision. "You are at:" is flavor text.
+* Use: This macro will display in your chat frame your current map coordinates with one decimal place precision. "You are at:" is flavor text.
 
 #Swapping Talents, Equipment and Stances
 ##Swap Current Dual-Spec
@@ -13,18 +13,18 @@ Categorized list of generally useful custom macros.
 /run if( GetActiveTalentGroup() == 1 ) then DEFAULT_CHAT_FRAME:AddMessage("Spec1...");SetActiveTalentGroup(2) else DEFAULT_CHAT_FRAME:AddMessage("Spec2...");SetActiveTalentGroup(1) end
 /in 6 /equipset [spec:2]Eq1;Eq2
 ```
-*Use: "Quickly" swaps your Primary/Secondary talent specs.
-*Note: Also changes your equipped item set, only need to change the name of Eq1 and Eq2
-*Requires: Libraries such as Ace or Chronos, that supply '/in' as a command, and will not work without.
-*Works in 3.1.1
+* Use: "Quickly" swaps your Primary/Secondary talent specs.
+* Note: Also changes your equipped item set, only need to change the name of Eq1 and Eq2
+* Requires: Libraries such as Ace or Chronos, that supply '/in' as a command, and will not work without.
+* Works in 3.1.1
 
 ##Swap Set then Spec
 ```
 /equipset [spec:1] PSS ; SSS
 /usetalents [spec:1] 2; [spec:2] 1
 ```
-*Use: Here is one that switches the set before the spec (may avoid some errors).
-*Note: Just have to replace PSS with the name of your primary spec set, and SSS with the name of your secondary spec set.</span>
+* Use: Here is one that switches the set before the spec (may avoid some errors).
+* Note: Just have to replace PSS with the name of your primary spec set, and SSS with the name of your secondary spec set.</span>
 
 ##Swap Equipment and Stance
 ```
@@ -32,7 +32,7 @@ Categorized list of generally useful custom macros.
 /cast [spec:1] <Secondary Stance>; <Primary Stance> 
 /usetalents [spec:1] 2; 1
 ```
-*Use: This macro will switch your talent spec and put you into the respective gear and stance.
+* Use: This macro will switch your talent spec and put you into the respective gear and stance.
 
 ##Swap Equipment and Stance 2
 ``
@@ -42,8 +42,8 @@ Categorized list of generally useful custom macros.
 /cast [spec:1] <Primary Stance>; [spec:2] <Secondary Stance>
 ```
 
-*Use: Here is an alternate version for fury warriors that cannot use the above macro due to Titan's Grip.
-*Note: Left click swaps the talent spec, right click swaps gear and stance.
+* Use: Here is an alternate version for fury warriors that cannot use the above macro due to Titan's Grip.
+* Note: Left click swaps the talent spec, right click swaps gear and stance.
 
 # One Button Spec, Stance, Equipment
 ```
@@ -52,7 +52,7 @@ Categorized list of generally useful custom macros.
 /in 5.30 /equipset [spec:1] Tank ; DPS
 ```
 
-*Use: A one button spec, stance and equipment interchanger, caters for Furry Warriors Titan's Grip
+* Use: A one button spec, stance and equipment interchanger, caters for Furry Warriors Titan's Grip
 
 ##Offhand Weapon Switching
 ```
@@ -60,8 +60,8 @@ Categorized list of generally useful custom macros.
 /equipslot 17 0 16
 ```
 
-*Use: manage off-hand weapons
-*Note: You might find yourself in a situation where you have two offhand weapons with the same name but different poisons on them and you want to switch between them quickly. Or perhaps you just want to alternate between two offhand weapons with just one hotkey.
+* Use: manage off-hand weapons
+* Note: You might find yourself in a situation where you have two offhand weapons with the same name but different poisons on them and you want to switch between them quickly. Or perhaps you just want to alternate between two offhand weapons with just one hotkey.
 Keep your alternate dagger in the sixteenth slot (lower right corner) of your main (rightmost) backpack.
 The number 17 refers to your offhand weapon slot. #showtooltip makes the macro's icon and tooltip display the icon of the equipped weapon, or hold down a modifier key (say Alt) and it will display the icon of the weapon that's ready to be switched in.
 *Works in 3.2.2
@@ -77,8 +77,8 @@ The number 17 refers to your offhand weapon slot. #showtooltip makes the macro's
 /run SetCVar("Sound_EnableSFX",sfx); 
 ```
 
-*Use: Replace "ExampleTrinket1" and "ExampleSpell2" with your cd(s) and abilities, then drag to your bar like a normal macro.
-*Note: For people that macro cd's into normal spells, such as petattacks, trinkets, everlasting potions, etc. it gets annoying being spammed with "This ability is not ready" and that fun error sound. I've seen a common solution online (similar to the macro above) that fixes this problem with a single issue that's almost as bad as the problem it's fixing.
+* Use: Replace "ExampleTrinket1" and "ExampleSpell2" with your cd(s) and abilities, then drag to your bar like a normal macro.
+* Note: For people that macro cd's into normal spells, such as petattacks, trinkets, everlasting potions, etc. it gets annoying being spammed with "This ability is not ready" and that fun error sound. I've seen a common solution online (similar to the macro above) that fixes this problem with a single issue that's almost as bad as the problem it's fixing.
 For people who play without sound to begin with, these macro will -enable your sound- every time you use them. So here is my solution. The overall effect is the same, but my macro checks to see what you sound currently is set to (enabled or disabled), disables it for the error, and then sets it back where you had it. (ex: if your sound was already off, it will prevent the text error without turning your sound on at the end)
 Works in 3.3.3a
 
@@ -92,7 +92,7 @@ No Error Text or Sound (Improved Again)
 /cast ExampleSpell1
 Credit: Vandalite of Feathermoon, and Xaeros of Shadowmoon for the macro this was based on.
 Use: Replace "ExampleTrinket2" and "ExampleSpell1" With your cooldowns and abilities, then drag to your bar like a normal macro.
-*Note: This is just like the one above but with an added tooltip that matches the original skill, and doesn't disable sound for the skill's error messages. Sound and error messages for the trinket use are still suppressed though. If you set the name of the macro to a blank space, you can't even tell it's a macro. This one is designed more for trinket use than anything else, but it's here for when you only want to silence one of the two skills this macro uses
+* Note: This is just like the one above but with an added tooltip that matches the original skill, and doesn't disable sound for the skill's error messages. Sound and error messages for the trinket use are still suppressed though. If you set the name of the macro to a blank space, you can't even tell it's a macro. This one is designed more for trinket use than anything else, but it's here for when you only want to silence one of the two skills this macro uses
 If you're running low on characters and you're using this for a trinket, you can replace the use command with "use 13" (for upper trinket) or "use 14" (for lower trinket).
 Works in 4.2
 
@@ -262,101 +262,106 @@ Not holding down a button: Will summon a mount of your choice (Note:<Mount of yo
 Holding down ctrl: Will make mining nodes appear on your minimap.
 Holding down shift: Will make herb nodes appear on your minimap.
 Holding down alt: Will show the Smelting pane, where you can smelt your ore bars.
-Enchant to Vellum Macro
+
+##Enchant to Vellum Macro
+```
 /run DoTradeSkill(GetTradeSkillSelectionIndex());
 /run for i=0,4,1 do for l=1,GetContainerNumSlots(i),1 do if GetContainerItemID(i,l)==38682 then UseContainerItem(i,l);end;end;end;
 /run ReplaceEnchant();
 /run ClearCursor();
+```
+
 To Use:
-Open Enchanting Skill
-Select Enchantment in skill panel to apply
-Have Enchanting Vellum in your inventory
-Press macro
-Credit: Ajudication of Terokkar-US
-Farming Macro
-/tar tilled
-/tar untilled
-/tar growing
-/tar infested
-/tar parched
-/tar encroach
-/tar wiggling
-/tar wild
-/tar alluring
-/tar tangled
-/tar runty
-/use seeds
-/use dented shovel
-/castsequence vintage bug sprayer,rusty watering can
-Not really all that happy with this macro, best I could come up with maybe some one can tweek it a bit
+* Open Enchanting Skill
+* Select Enchantment in skill panel to apply
+* Have Enchanting Vellum in your inventory
+* Press macro
 
-Basicly this macro works off of the mechanic that if you destroy and replant your crops eventually a bursting crop will spwan that can be instantly harvested. Make sure your standing in front of dirt/crop before you start and replace seeds in the macro with the full name of what ever seeds your are using.
-This macro has to be used in conjunction with Interact with NPC keybinding. Basicly key bind any key to interact with npc then just hit your macro key and interact with npc keys in sequence.
-The chances of getting bursting crops to proc is really low dont even attempt this unless your desperate and have the time and money to waste. You could also take out the dented shovel and use this method as a planting and maintenance macro till you get enough rep for the machines.
-Raiding and Parties
-Post Random LFG Msg
-Post Random Dungeon LFG Message in LFG Channel
-
+#Raiding and Parties
+##Post Random Dungeon LFG Message in LFG Channel
+```
 /run local a,b,c,d,t,h,r,l,z;a,b=UnitClass("player");c=UnitLevel("player");l,t,h,d=GetLFGRoles();r="";if d then r=r.."DPS " end;if t then r=r.."TANK " end;if h then r=r.."HEALER" end;z= a.." LEVEL "..c.." LFG RDF "..r;SendChatMessage(z,"CHANNEL",nil,4)
-Use: Post a Random Dungeon Looking for Group Message in LookingForGroup channel.
-Works in 3.3.5a
-Notes: That macro collect information about your class, level, and the functions in a party you have signed for in the dungeon finder and send a looking for group message, with the collected information, to LookingForGroup channel.
-Reload UI and notify group
+```
+
+* Use: Post a Random Dungeon Looking for Group Message in LookingForGroup channel.
+* Note: That macro collect information about your class, level, and the functions in a party you have signed for in the dungeon finder and send a looking for group message, with the collected information, to LookingForGroup channel.
+
+##Reload UI and notify group
+```
 /afk reloading UI
 /run SendChatMessage("reloading my UI - afk for a sec", ((UnitInRaid("player")and "RAID")or(GetNumPartyMembers()>0 and "PARTY")or "AFK")); 
 /console reloadui
-Use: Reload your UI, send a message to your party/raid telling them you're doing so and set an appropriate /afk message.
-Credit: Ashel of Antonidas
-Works in 3.2.0a
-Autoassist tank if tank target can harm
-Autoassist tank if the tank's target can be attacked
+```
 
+* Use: Reload your UI, send a message to your party/raid telling them you're doing so and set an appropriate /afk message.
+* Works in 3.2.0a
+
+##Autoassist tank if the tank's target can be attacked
+```
 /target [@focustarget, harm, nodead]
-Use /focus to set focus on the main tank (or right click on the tank and select focus).
+```
+
+* Use /focus to set focus on the main tank (or right click on the tank and select focus).
 Your target will be set to the main tank's target, but only if the tank is targeting an enemy which is alive.
-Works in 3.3
+* Works in 3.3
+```
 #show Attack
 /target [@focustarget, harm, nodead]
 /startattack
+```
+
 The melee dps version also starts attacking, and sets the icon to your attack ability.
-Multi-Purpose Party/Solo Attack Spell
+
+##Multi-Purpose Party/Solo Attack Spell
+```
 #showtooltip <spellname>
 /cast [harm] [@targettarget, harm] [@focus, harm] [@focustarget, harm] <spellname>
-Use: Cast an attack spell with limited need to change target. Is not useful for AoE spells as they often do not use a direct target.
-Note: Replace <spellname> (including the <> signs) with the name of the ability you want to cast and don't forget to replace both places <spellname> shows up.
-Credit: Wu of Kael'thas
-Tested and working in 4.0.6
+```
+
+* Use: Cast an attack spell with limited need to change target. Is not useful for AoE spells as they often do not use a direct target.
+* Note: Replace <spellname> (including the <> signs) with the name of the ability you want to cast and don't forget to replace both places <spellname> shows up.
+* Tested and working in 4.0.6
+
 This macro works a little differently than some others, as it does not perform a change to your playstyle, but merely limits mouse clicks (if desired) and encourages coordinated assaults. This casts a spell or ability on a priority based target. If you are targetting an enemy, it will cast at your target; if you are targeting a friend who is attacking a mob, it will cast at their target; if you have no target, but your focus is a mob (i.e. boss fight), it will cast at the mob; and finally if you have no target but your focus is friendly and has an enemy target, it will cast at the enemy.
 
 This has been particularly useful for our guild, allowing us to easily coordinate assaults without the requirement for mad AoE damage. Our Off-tanks typically select the main tank as their focus, while our DPS (ranged and melee) select their particular tank or off tank. When the focus changes targets, the DPS are immediately updated to the new target. Quite Handy! For soloing or special circumstances where each person needs their own target, the macros don't hinder us in anyway because it chooses OUR target first.
 
 Example
+```
 #showtooltip Fire Blast
 /cast [harm] [@targettarget, harm] [@focus, harm] [@focustarget, harm] Fire Blast
-Multi-Purpose Party Healing
+```
+
+##Multi-Purpose Party Healing
+```
 #showtooltip <spellname>
 /cast [help] [@targettarget, help] [@focustarget, help] [@focus, help] [@player] <spellname>
-Use: Cast an healing/buff spell with limited need to change target. Is not useful for AoE spells as they often do not use a direct target.
-Note: Replace <spellname> with the name of the ability you want to cast. This includes the <>! And don't forget both places!
-Credit: Wu of Kael'thas
-Tested and working in 4.0.6
+```
+
+* Use: Cast an healing/buff spell with limited need to change target. Is not useful for AoE spells as they often do not use a direct target.
+* Note: Replace <spellname> with the name of the ability you want to cast. This includes the <>! And don't forget both places!
+* Tested and working in 4.0.6
+
 This macro works like the above, save the order of priority is switched a little (based on observed need). It can be used with a number of strategies, particularly when combined with the above macro. Priorities are as follows: If you are targeting a friendly, cast at them; if your target is targeting a friendly, cast at the friendly (useful for quick adds and bosses with random targeting); if your focus is targeting a friendly, cast at the friendly (useful for bosses); if your focus is friendly, cast at the focus; otherwise, cast at yourself.
 
 Particular bonus when you are using the Multi-Purpose Attack Spell above, as it means you may keep the same person targeted for both healing and harming. You may also create awesome heal groups, for parties with weak AoE heals setting one person as the "main heal". These are just a couple of uses.
 
-Parties
-Announce Vent in Party
-
+#Parties
+##Announce Vent in Party
+```
 /party My Guild Vent | abc.leetvent.com
 /party My Guild Vent | 1234
 /party My Guild Vent | secretpassword
 /party Normalize Vent - http://some.vent.server/somewhere
 /threshold rare
-Use: Announces your Vent details to your party, sets your loot threshold Rare if you are the leader.
-Works in 3.1.1
-Raiding
-Announce Vent in Raid
+```
 
+* Use: Announces your Vent details to your party, sets your loot threshold Rare if you are the leader.
+* Works in 3.1.1
+
+#Raiding
+##Announce Vent in Raid
+```
 /rw Vent Details Posted
 /raid My Guild Vent | abc.leetvent.com
 /raid My Guild Vent | 1234
@@ -364,48 +369,37 @@ Announce Vent in Raid
 /raid Normalize Vent - http://some.vent.server/somewhere
 /threshold epic
 /master player
-Use: Announces your Vent details to your raid, sets your loot threshold Epic master looter (with yourself as the master looter) if you are the leader.
-Works in 3.1.1
-List raid w/o food buff
+```
 
-List raid members without a food buff
+* Use: Announces your Vent details to your raid, sets your loot threshold Epic master looter (with yourself as the master looter) if you are the leader.
+* Works in 3.1.1
+
+##List raid members without a food buff
 
 Use this version to list members without a food buff to yourself:
-
+```
 /run nfb="[Eat!]: ";for i=1,GetNumRaidMembers()do for b=1,40 do ua=UnitAura('raid'..i,b);if ua=="Well Fed"or ua=="Food"then break;elseif b==40 and ua~="Well Fed"then nfb=nfb..UnitName('raid'..i).." ";end;end;end;print(nfb);
+```
+
 Use this version to send the list to raid chat:
-
+```
 /run nfb="[Eat!]: ";for i=1,GetNumRaidMembers()do for b=1,40 do ua=UnitAura('raid'..i,b);if ua=="Well Fed"or ua=="Food"then break;elseif b==40 and ua~="Well Fed"then nfb=nfb..UnitName('raid'..i).." ";end;end;end;SendChatMessage(nfb,"raid");
-Credit: Xaeros of Shadowmoon
-Use: Click the macro to report members in raid that are neither food buffed nor eating.
-Works in 3.3.3a
-List raid w/o active flask
+```
 
-List raid members without a flask active
+* Use: Click the macro to report members in raid that are neither food buffed nor eating.
+* Works in 3.3.3a
+
+##List raid members without a flask active
 
 Use this version to list members without an active flask to yourself:
-
+```
 /run nf="[Flask!]: ";for i=1,GetNumRaidMembers()do for b=1,41 do ufl=UnitAura('raid'..i,b);if ufl then if strfind(ufl,"Flask")or strfind(ufl,"Distilled")then break;end;elseif b==41 then nf=nf..UnitName('raid'..i).." ";end;end;end;print(nf);
+```
+
 Use this version to send the list to raid chat:
-
+```
 /run nf="[Flask!]: ";for i=1,GetNumRaidMembers()do for b=1,41 do ufl=UnitAura('raid'..i,b);if ufl then if strfind(ufl,"Flask")or strfind(ufl,"Distilled")then break;end;elseif b==41 then nf=nf..UnitName('raid'..i).." ";end;end;end;SendChatMessage(nf,"raid");
-Credit: Xaeros of Shadowmoon
-Use: Click the macro to report members in raid that are neither food buffed nor eating.
-Works in 3.3.3a
-Will not report people using the Flask of the North.
-Just For Fun
-Below are macros that serve no real purpose in-game beyond amusement.
+```
 
-Mounts
-There's a whole page dedicated to Mount Macros.
-
-Vanity Pets
-Wheel O' Pets
-
-/run q=C_PetJournal;v={q.GetNumPets()}r=random(v[2])p={q.GetPetInfoByIndex(r)}q.SummonPetByGUID(p[1])SendChatMessage("spins the Wheel O' Pets! The wheel stops on ["..r.."/"..v[2].."]: "..p[8].."!","emote");
-Credit Xaeros of Shadowmoon
-Use: Click to summon a random vanity pet. This macro has 49 free characters, so feel free to change your message. By default it says: "[player] spins the Wheel O' Pets! The wheel stops on [[random pet number]/[total pet number]]: [random pet's name]!
-Works in 5.4.7
-Random Pet with Announce
-
-/run q=C_PetJournal;v={q.GetNumPets()}r=random(v[2])g={"their","his","her"}x=UnitSex("player")p={q.GetPetInfoByIndex(r)}q.SummonPetByGUID(p[1])SendChatMessage("gasps as "..p[8] .." hops out of "..g[x] .." pocket!","emote
+* Use: Click the macro to report members in raid that are neither food buffed nor eating.
+* Works in 3.3.3a
