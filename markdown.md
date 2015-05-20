@@ -1,3 +1,5 @@
+# General Formatting for Markdown
+
 # This is an H1
 ## This is an H2
 ###### This is an H6
@@ -13,9 +15,13 @@ such as an ordered or unordered list, for that to be rendered. Like this:
 * Item 2
 
 *Italic characters*
+
 _Italic characters_
+
 **bold characters**
+
 __bold characters__
+
 ~~strikethrough text~~
 
 * Item 1
@@ -39,11 +45,14 @@ __bold characters__
     * Item 3b
     * Item 3c
 
+
 Introducing my quote:
   
 > Neque porro quisquam est qui
 > dolorem ipsum quia dolor sit amet,
 > consectetur, adipisci velit...
+
+# Code Blocks, function(), syntax highlighting
 
 Use the backtick to refer to a `function()`.
   
@@ -74,6 +83,7 @@ window.onbeforeunload = function() {
     }
 };
 ``` 
+# Links, Images
 
 This is [an example](http://www.slate.com/ "Title") inline link.
  
@@ -94,6 +104,8 @@ This is [an example](http://www.slate.com/ "Title") inline link.
 <!--Using an image reference-->
 ![Mockup for feature A][MockupA]
 ...
+
+# Tables
 
 | Day     | Meal    | Price |
 | --------|---------|-------|
