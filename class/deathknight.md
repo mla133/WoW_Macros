@@ -77,14 +77,17 @@ Use: This will cast Lichborne, making you undead, and then cast Death Coil on yo
 Note: Since Death Coil damages the enemy but heals the friendly undead,it will heal you. And since Lichborne isn't on the GCD,there is no need to spam the macro,since LB and DC will be cast together.
 Works in 5.0.5, but make sure you have 40+ runic power.
 Blood
-General Tanking Macro
+##General Tanking Macro
+```
 #showtooltip
 /targetnearestenemy
 /castsequence reset=combat/10 Dark Command, Heart Strike, Blood Boil, Death Coil, Heart Strike,
+```
 Use: Tanking rotation (spamable).
 Note: I like this macro because it is well balanced and can be mashed throughout a fight, meaning you can concentrate whilst working on other things such as interrupts and ads.
 Works in Cataclysm, level 71 DK
-Super Panic Button Mode
+##Super Panic Button Mode
+```
 /cast Death Pact
 /cast Bone Shield
 /cast Icebound Fortitude
@@ -94,41 +97,52 @@ Super Panic Button Mode
 /cast Oralius' Whispering Crystal
 /cast Lichborne
 /castsequence [@player] Death Coil, Death Coil, Death Coil
+```
 Use: In a pinch. Heal, defense, defense, defense, bonus health, magic defense, stamina.
 None of these are on GCD so they all cast instantly, no castsequence required.
 Play around with this to get it working right for you, these are all the defensive abilities I had at the time I made this, you may have more.
 Note: Death Pact is a talent and the Crystal is an item. This works if you have them or not, but if you don't have Death Pact the button may be grayed out.
-Lower Level Tanking Macro
+##Lower Level Tanking Macro
+```
 #showtooltip
 /castsequence reset=combat/6 Heart Strike, Death Strike, Heart Strike, Death Strike, Death Coil
+```
 Use: Lower level takning rotation (spamable). 
 Note: Spam this on your enemies, and it allows you to change enemies when ever you need to while still spamming it. You can focus on anything while just pressing one constantly, so tanking requires no skill.
 Works with DKs at 60+
 Heartstrike has been removed
-Panic Button
+##Panic Button
+```
 #showtooltip
 /Cast Vampiric Blood
 /Cast Rune Tap
 /Cast Bone Shield
 /cast Anti-Magic Shell
+```
 Use: Press this in combat and it will increase healing done.
 Note: Heals you a bit add a shield and reduce magic damage. Add in Gift of the Naaru or other race specials for healing if you want a bigger boost. Useful for if you have a bad healer or they're out of mana etc. It lasts a couple of seconds, but it's very useful in combat.
 Works in Cataclysm, level 71 DK
-Take All Aggro button
+##Take All Aggro button
+```
 /castsequence reset=combat/4 Blood Boil, target=random, Dark Command, Death and Decay
+```
 Use: Very effective for ending all aggro on your teammates.
 Note: Press this to unleash Blood Boil to hold argo, randomly target a enemy, Dark Command them, and then release Death and Decay to get the rest of the aggro.
 Works in Cataclysm, level 73 DK
-Unholy
-Offensive/Heal Death Coil
+#Unholy
+##Offensive/Heal Death Coil
+```
 /cast [Mod:shift,@pet] Death Coil
 /cast [nomod] Death Coil
+```
 Use: If you're specced into unholy you have a permanent ghoul.
 Note: This macro basically heals your ghoul with death coil while holding shift otherwise it will just use Death Coil as usual.
 Works in 4.1
-Offensive/Heal + Mouseover Death Coil
+##Offensive/Heal + Mouseover Death Coil
+```
 #showtooltip Death Coil
 /cast [@mouseover,exists]Death Coil;[@target,exists]Death Coil;[@pet]Death Coil
+```
 Use: If you're specced into unholy & have your permanent ghoul summoned.
 Can also be used in other specs as well.
 Note: This macro is usefull if you don't like key modifiers or if you need an alternative to modifiers.
@@ -136,13 +150,3 @@ This macro will cast Death Coil at your mouseover target*, at your current selec
 (*) If you have the Lichborne talent, you can mouse over your own portrait or select yourself to heal yourself rather than deal damage to a hostile target.
 (*) If you have the Major Glyph "Death Coil", you can mouse-over or select a friendly target to heal them.
 Works in 5.4.7
-Goblin Macros
-Cliffhanger
-/castsequence Death Grip, Rocket Jump
-Use: Run and jump backwards of a cliff (or dismount from a flying mount) and cast this. It'll pull the target off the cliff with DG, and then you'll land on the cliff thanks to RJ. Works in 4.1.0a
-
-Death Grip + Unholy Blight
-#showtooltip
-/cast Death Grip
-/cast Unholy Blight
-You can add "/use 13" and/or "/use 14" right above Unholy blight to use your trinkets as well.
