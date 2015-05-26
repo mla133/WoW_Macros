@@ -47,3 +47,28 @@ Keep your alternate dagger in the sixteenth slot (lower right corner) of your ma
 The number 17 refers to your offhand weapon slot. #showtooltip makes the macro's icon and tooltip display the icon of the equipped weapon, or hold down a modifier key (say Alt) and it will display the icon of the weapon that's ready to be switched in.
 * Works in 3.2.2
 
+## Speed/DPS/Heal Swapping Sets
+```
+#showtooltip explorer's Walking stick
+/equipset [noequipped:Staves, spec:2] Speed Dps
+/equipset [equipped:Staves, spec:2] dps
+/equipset [noequipped:Staves, spec:1] Speed Heal
+/equipset [equipped:Staves, spec:1] healer
+```
+So in 6.0.2 they changed the way movement speed buffs work. They no longer stack multiplicative but they also allowed you do stack multiple movement speed buffs.
+
+If you collect all of these items you will be moving at 150% in just normal form without any buffs or glyphs.
+
+Fleet Primal Diamond Easy 200 gold on auction house. Equip a random helm and gem it.
+
+Defiler's Cloth Boots Any defiler boots are fine. They cost 85 honor. Alliance Horde
+
+Explorer's Walking Stick Requires honored Cenarion Expedition OR Runeblade of Baron Rivendare both give the same movement speed buff. Fury warriors can equip both for a extra 10% movement speed boost (total of 160%)
+
+Enchant the boots with any of the normal movement speed enchants like Pandaren's Step
+
+Figurine - Golden Hare JC only! Recipe is a world drop. I found mine for 98g hold on auction house. Mats are dirt cheap.
+
+If you wear all of those items you will have 150%(160% fury warrior) movement speed. This will still stack with all the normal movement speed buffs like Burst of speed, Ghost wolf, Stampeding Roar.
+
+Ideally you want to have a separate armor set for all of these items so you can use a macro to swap. I named my armor set "Speed" 
