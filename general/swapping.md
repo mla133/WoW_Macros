@@ -49,7 +49,7 @@ The number 17 refers to your offhand weapon slot. #showtooltip makes the macro's
 
 ## Speed/DPS/Heal Swapping Sets
 ```
-#showtooltip explorer's Walking stick
+#showtooltip Explorer's Walking stick
 /equipset [noequipped:Staves, spec:2] Speed Dps
 /equipset [equipped:Staves, spec:2] dps
 /equipset [noequipped:Staves, spec:1] Speed Heal
@@ -59,15 +59,15 @@ So in 6.0.2 they changed the way movement speed buffs work. They no longer stack
 
 If you collect all of these items you will be moving at 150% in just normal form without any buffs or glyphs.
 
-Fleet Primal Diamond Easy 200 gold on auction house. Equip a random helm and gem it.
+[Fleet Primal Diamond](http://www.wowhead.com/item=76887/fleet-primal-diamond) Easy 200 gold on auction house. Equip a random helm and gem it.
 
-Defiler's Cloth Boots Any defiler boots are fine. They cost 85 honor. Alliance Horde
+[Defiler's Cloth Boots](http://www.wowhead.com/item=20159) Any defiler boots are fine. They cost 85 honor. Alliance Horde
 
-Explorer's Walking Stick Requires honored Cenarion Expedition OR Runeblade of Baron Rivendare both give the same movement speed buff. Fury warriors can equip both for a extra 10% movement speed boost (total of 160%)
+[Explorer's Walking Stick](http://www.wowhead.com/item=25835/explorers-walking-stick) Requires honored Cenarion Expedition OR [Runeblade of Baron Rivendare](http://www.wowhead.com/item=13505) both give the same movement speed buff. Fury warriors can equip both for a extra 10% movement speed boost (total of 160%)
 
-Enchant the boots with any of the normal movement speed enchants like Pandaren's Step
+Enchant the boots with any of the normal movement speed enchants like [Pandaren's Step](http://www.wowhead.com/spell=104414/pandarens-step)
 
-Figurine - Golden Hare JC only! Recipe is a world drop. I found mine for 98g hold on auction house. Mats are dirt cheap.
+[Figurine - Golden Hare] JC only! Recipe is a world drop. I found mine for 98g hold on auction house. Mats are dirt cheap.
 
 If you wear all of those items you will have 150%(160% fury warrior) movement speed. This will still stack with all the normal movement speed buffs like Burst of speed, Ghost wolf, Stampeding Roar.
 
