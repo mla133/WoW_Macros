@@ -67,7 +67,7 @@ If you collect all of these items you will be moving at 150% in just normal form
 
 Enchant the boots with any of the normal movement speed enchants like [Pandaren's Step](http://www.wowhead.com/spell=104414/pandarens-step)
 
-[Figurine - Golden Hare] JC only! Recipe is a world drop. I found mine for 98g hold on auction house. Mats are dirt cheap.
+[Figurine - Golden Hare](http://www.wowhead.com/item=21940) JC only! Recipe is a world drop. I found mine for 98g hold on auction house. Mats are dirt cheap.
 
 If you wear all of those items you will have 150%(160% fury warrior) movement speed. This will still stack with all the normal movement speed buffs like Burst of speed, Ghost wolf, Stampeding Roar.
 
