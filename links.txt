@@ -1,2 +1,6 @@
 http://www.wowhead.com/guides/raiding/guide-to-soloing-legacy-raids
 summonstone.com
+http://www.wowwiki.com/Events_A-Z_%28full_list%29
+http://www.wowwiki.com/Saving_variables_between_game_sessions
+http://www.wowwiki.com/UI_XML_tutorial
+

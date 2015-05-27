@@ -44,7 +44,7 @@ Example with conditionals:
 ```
 #showtooltip [nomod] Flash of Light; [mod:shift] Balanced Heartseeker
 ```
-##`/castsequence macros
+##`/castsequence` macros
 Syntax:
 ```
 /castsequence [conditionals] resetparameter <spell>, <spell>, <spell>

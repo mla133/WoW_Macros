@@ -7,6 +7,28 @@
 ```
 Use: Casts your typical Death Grip, but with an inspirational Lich King saying afterwards.
 
+## Mouse-over Death Grip
+```
+#showtooltip Death Grip
+/cast [target=mouseover, exists] Death Grip; Death Grip
+```
+Useful to quickly grip targets without having to target them first.
+
+## PL/UB Talent Switching
+```
+#showtooltip
+/cast [talent:1/2] Plague Leech; [talent:1/3] Unholy Blight
+```
+This allows you to use the same button for Plague Leech and Unholy Blight without having to move the ability from the talents pane to your action bar.
+
+## Presence Shifting
+```
+#showtooltip
+/cast Blood Presence
+/cast Unholy Presence
+```
+This allows you to easily switch between Blood and Unholy presence within one button.
+
 #Omni-Disease
 ```
 #showtooltip
