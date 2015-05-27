@@ -3,4 +3,6 @@ summonstone.com
 http://www.wowwiki.com/Events_A-Z_%28full_list%29
 http://www.wowwiki.com/Saving_variables_between_game_sessions
 http://www.wowwiki.com/UI_XML_tutorial
+http://www.wowpedia.org/Getting_started_with_writing_addons
+http://www.wowpedia.org/World_of_Warcraft_API
 
