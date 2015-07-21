@@ -1,3 +1,13 @@
+# Tab-Targetting
+## Fixes issue with tab targetting where the targetting does not select the nearest enemy
+```
+#showtooltip
+/cleartarget
+/targetenemy [noharm][noexists]
+/cast <spell-name>
+/script UIErrorsFrame:Clear()
+```
+
 #Training and Leveling
 ##Tanks: Check unhittability, avoidance, and dist to hard-defcap
 ```
