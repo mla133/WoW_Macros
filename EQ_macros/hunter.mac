@@ -41,7 +41,7 @@ Sub Main
    /declare RV_DisplayStats     int outer  1 
 
    |------------------------------------------------------------ 
-   |Loot Array Information. 
+   |Mob Array Information. 
    |------------------------------------------------------------ 
    /call ReadINI HunterMob.ini "${Zone.Name}" Mob
    /if (!${Defined[RV_MobArray]}) { 
@@ -50,7 +50,7 @@ Sub Main
    } 
 
    |------------------------------------------------------------ 
-   |Mob Array Information. 
+   |Loot Array Information. 
    |------------------------------------------------------------ 
    /call ReadINI HunterLoot.ini "${Zone.Name}" Loot 
    /if (!${Defined[RV_LootArray]}) { 
