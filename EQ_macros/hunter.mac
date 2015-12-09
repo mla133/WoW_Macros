@@ -1,0 +1,452 @@
+| Hunter Macro 
+| Hunter.mac 
+| Author      : robdawg 
+| Version     : v1.2 2004-05-13 10:06pm PST 
+| Useage      : /macro Hunter 
+| Description : This macro will run your character around killing any mobs in your 
+|      RV_MobArray.  Then it will attempt to loot all items in your 
+|      RV_LootArray.  This is definitely a work in progress and I am sure 
+|      someone can think of plenty of upgrades for this. 
+|------------------------------------------------------------------------------------ 
+
+Sub Main 
+
+   |------------------------------------------------------------ 
+   |How many times should aquire target fail before delaying? 
+   |------------------------------------------------------------ 
+   /declare RV_FailMax          int outer  3 
+   |------------------------------------------------------------ 
+   |How far would you like to target a mob? 
+   |------------------------------------------------------------ 
+   /declare RV_MaxRadius        int outer  3000 
+   |------------------------------------------------------------ 
+   |How far is the combat range? 
+   |------------------------------------------------------------ 
+   /declare RV_Range            int outer 10 
+   |------------------------------------------------------------ 
+   |What is the minimum Z Value of mobs I should target? 
+   |------------------------------------------------------------ 
+   /declare RV_MinZRange        int outer  -1000 
+   |------------------------------------------------------------ 
+   |What is the maximum Z Value of mobs I should target? 
+   |------------------------------------------------------------ 
+   /declare RV_MaxZRange        int outer  1000 
+   |------------------------------------------------------------ 
+   |Should I loot all items? 
+   |------------------------------------------------------------ 
+   /declare RV_LootAllItems     int outer  0 
+   |------------------------------------------------------------ 
+   |Should I display stats? 
+   |------------------------------------------------------------ 
+   /declare RV_DisplayStats     int outer  1 
+
+   |------------------------------------------------------------ 
+   |Loot Array Information. 
+   |------------------------------------------------------------ 
+   /call ReadINI HunterMob.ini "${Zone.Name}" Mob
+   /if (!${Defined[RV_MobArray]}) { 
+      /echo Mob Array Creation Error, ending macro... 
+      /endmacro 
+   } 
+
+   |------------------------------------------------------------ 
+   |Mob Array Information. 
+   |------------------------------------------------------------ 
+   /call ReadINI HunterLoot.ini "${Zone.Name}" Loot 
+   /if (!${Defined[RV_LootArray]}) { 
+      /echo No Loot Array Created... 
+   } 
+
+   |------------------------------------------------------------ 
+   |Variables that you don't need to worry about. 
+   |------------------------------------------------------------ 
+   /declare RV_FailCounter      int outer  0 
+   /declare RV_MyTargetID       int outer  0 
+   /declare RV_MyTargetName     string outer 
+   /declare RV_MyTargetDead     int outer  0 
+   /declare RV_InvalidTargetID  int outer  0 
+   /declare RV_HasTarget        int outer  0 
+   /declare RV_RandomWait       int outer  0 
+   /declare RV_LootSlot         int outer  0 
+   /declare RV_CheckLook        int outer  0 
+   /declare RV_Fighting         int outer  0 
+   /declare RV_TargetDead       int outer  0 
+   /declare RV_MyXLOC           int outer  0 
+   /declare RV_MyYLOC           int outer  0 
+    
+   /declare RV_FastRange        int outer 
+   /declare RV_RangeMax         int outer 
+   /declare RV_RangeMin         int outer 
+   /varcalc RV_FastRange ${RV_Range}+3 
+   /varcalc RV_RangeMax ${RV_Range}+1 
+   /varcalc RV_RangeMin ${RV_Range}-1 
+
+   :Start 
+   /doevents 
+   /call GMCheck 
+   /call GetTarget 
+
+   :KillAdds 
+   /if (${RV_HasTarget}) /call MoveToMob 
+   /if (${RV_HasTarget}) /call CombatSub 
+   /if (${RV_HasTarget}) /call MoveToMob 
+   /if (${RV_HasTarget} && (${Defined[RV_LootArray]} || ${RV_LootAllItems})) /call LootMob 
+   /if (${RV_DisplayStats}) /call DisplayStats 
+   /call ResetSub 
+
+   /varset RV_RandomWait ${Math.Rand[5]} 
+   /varcalc RV_RandomWait ${RV_RandomWait}+1 
+   /echo Paranoia - Waiting ${RV_RandomWait} seconds before resuming 
+   /delay ${RV_RandomWait}s 
+    
+   /if (${Target.ID}) { 
+      /echo Looks like something is attacking us, killing it... 
+      /delay 1s 
+      /varset RV_HasTarget 1 
+      /varset RV_Fighting 1 
+      /goto :KillAdds 
+   } 
+    
+   /goto :Start 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Aquire Target 
+|-------------------------------------------------------------------------------- 
+Sub GetTarget 
+
+   /declare RV_CurrentRadius   int local 
+   /declare RV_TargetSub   int local 
+   :Acquire 
+   /for RV_CurrentRadius 100 to ${RV_MaxRadius} step 100 
+      /for RV_TargetSub 1 to ${RV_MobArray.Size} 
+         /squelch /target radius ${RV_CurrentRadius} nopcnear notid ${RV_InvalidTargetID} npc "${RV_MobArray[${RV_TargetSub}]}" 
+         /varset RV_MyTargetID ${Target.ID} 
+         /varset RV_MyTargetDead 0 
+         /if (${Target.ID}) { 
+            /if (${Int[${Target.PctHPs}]}<100) { 
+               /echo Mob NOT a Full Health, picking another... 
+               /varset RV_InvalidTargetID ${Target.ID} 
+               /call ResetSub 
+               /goto :Acquire 
+            } 
+            /if (${Int[${Target.Z}]}<${RV_MinZRange}) { 
+               /echo Mob is BELOW Min Z Range, picking another... 
+               /varset RV_InvalidTargetID ${Target.ID} 
+               /call ResetSub 
+               /goto :Acquire 
+            } 
+            /if (${Int[${Target.Z}]}>${RV_MaxZRange}) { 
+               /echo Mob is ABOVE Max Z Range, picking another... 
+               /varset RV_InvalidTargetID ${Target.ID} 
+               /call ResetSub 
+               /goto :Acquire 
+            } 
+            /varset RV_HasTarget 1 
+            /varset RV_MyTargetName ${Target.CleanName} 
+            /echo Acquired ${Target.CleanName} at range ${Int[${Target.Distance}]} 
+            /return 
+         } 
+      /next RV_TargetSub 
+      /delay 2 
+   /next RV_CurrentRadius 
+
+   /if (!${Target.ID}) { 
+      /delay 2s 
+      /varcalc RV_FailCounter ${RV_FailCounter}+1 
+      /echo Failed to Acquire Target in Range ${RV_MaxRadius} ${RV_FailCounter} Time(s) 
+      /if (${RV_FailCounter}>=${RV_FailMax}) { 
+         /echo Waiting for Respawns, Resetting Failure Counter... 
+         /delay 60s 
+         /varset RV_FailCounter 0 
+      } 
+      /goto :Acquire 
+   } 
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Moving 
+|-------------------------------------------------------------------------------- 
+Sub MoveToMob 
+
+   /varset RV_MyXLOC ${Int[${Me.X}]} 
+   /varset RV_MyYLOC ${Int[${Me.Y}]} 
+   /declare RV_DistanceTimer timer 15 
+    
+   /doevents 
+    
+   :MovementLoop 
+
+   /if ((!${RV_Fighting})&&(!${RV_TargetDead})&&(${Target.PctHPs}<100)) { 
+      /echo Mob not at full health, picking another... 
+      /varset RV_InvalidTargetID ${Target.ID} 
+      /varset RV_HasTarget 0 
+      /call ResetSub 
+      /return 
+   } 
+
+   /if (${Target.ID}) { 
+      /face fast 
+   } 
+   /if (${Int[${Target.Distance}]}>${RV_FastRange}) { 
+      /keypress forward hold 
+   } 
+   /if (${Int[${Target.Distance}]}<${RV_FastRange}&&${Int[${Target.Distance}]}>${RV_RangeMax}) { 
+      /keypress forward 
+   } 
+   /if (${Int[${Target.Distance}]}<${RV_RangeMin}) { 
+      /keypress back 
+   } 
+   /if (!${RV_DistanceTimer}) { 
+      /if ((${RV_MyXLOC}==${Int[${Me.X}]})&&(${RV_MyYLOC}==${Int[${Me.Y}]})) /call HitObstacle 
+      /varset RV_MyXLOC ${Int[${Me.X}]} 
+      /varset RV_MyYLOC ${Int[${Me.Y}]} 
+      /varset RV_DistanceTimer 15 
+      /goto :Movementloop 
+   } 
+   /if (${Int[${Target.Distance}]}>${RV_FastRange}) /goto :MovementLoop 
+
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Combat 
+|-------------------------------------------------------------------------------- 
+Sub CombatSub 
+
+   /echo Attacking Mob NOW! 
+   /varset RV_Fighting 1 
+   /varset RV_TargetDead 0 
+    
+   :CombatLoop 
+   /doevents 
+   /attack on 
+    
+   /call MoveToMob 
+   /call SpecialIT 
+
+   /if (!${Target.ID}) { 
+      /attack off 
+      /keypress forward 
+      /keypress back 
+      
+      /varset RV_TargetDead 1 
+      /varset RV_Fighting 0 
+      /delay 1s 
+      /target radius 30 corpse 
+      /delay 1s 
+      /if (!${Target.ID}) { 
+         /call ResetSub 
+         /return 
+      } 
+      /face fast 
+   } 
+   /if (!${RV_TargetDead}) { 
+      /goto :CombatLoop 
+   } 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Special Combat 
+|-------------------------------------------------------------------------------- 
+Sub SpecialIt 
+
+   /declare TempID    int inner  0 
+
+   /if ((${Target.Distance}<11)&&(${Me.AbilityReady["Bash"]})) /doability "Bash" 
+    
+   /if ((${Int[${Me.PctHPs}]}<50)&&(${Me.Gem["Light of Nife"]})&&(${Me.SpellReady["Light of Nife"]})) { 
+      /varset TempID ${Target.ID} 
+      /keypress forward 
+      /keypress back 
+      /keypress F1 
+      /echo Casting Heal Spell because of low health... 
+      /cast "Light of Nife" 
+      /delay 3s 
+      /target id ${TempID} 
+   } 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Looting 
+|-------------------------------------------------------------------------------- 
+Sub LootMob 
+
+   /declare LootSlot    int inner  0 
+   /declare LootCheck   int inner  0 
+   /declare LootTotal   int inner  0 
+    
+   /face fast 
+    
+   /keypress forward 
+   /keypress back 
+    
+   /fastdrop on 
+   /lootn never 
+   /delay 2s 
+   /loot 
+   /delay 2s 
+   /if (!${Corpse.Items}) { 
+      /echo NO LOOT! Cheap Bastard! 
+      /return 
+   } 
+
+   /varset LootTotal ${Corpse.Items} 
+   /for LootSlot 1 to ${LootTotal} 
+      /itemnotify loot${LootSlot} leftmouseup 
+      /delay 1s 
+      /if (${RV_LootAllItems}) { 
+         /echo Keeping a ${Cursor.Name}... WOOT! 
+         /autoinventory 
+         /delay 1s 
+      } else { 
+         /for LootCheck 1 to ${RV_LootArray.Size} 
+            /if (${Cursor.Name.Find[${RV_LootArray[${LootCheck}]}]}) { 
+               /echo Keeping a ${Cursor.Name}... WOOT! 
+               /varcalc RV_LootStats[${LootCheck}] ${RV_LootStats[${LootCheck}]}+1 
+               /autoinventory 
+               /delay 1s 
+            } 
+         /next LootCheck 
+      } 
+      /if (${Cursor.ID}) { 
+         /echo Destroying a ${Cursor.Name}... 
+         /destroy 
+         /delay 1s 
+      } 
+   /next LootSlot 
+    
+   /notify LootWnd DoneButton leftmouseup 
+   /delay 2
+   
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Reset 
+|-------------------------------------------------------------------------------- 
+Sub ResetSub 
+
+   /keypress esc 
+   /keypress esc 
+   /keypress esc 
+   /keypress esc 
+    
+   /varset RV_HasTarget 0 
+   /varset RV_TargetDead 0 
+   /varset RV_Fighting 0 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Obstacle Avoidance 
+|-------------------------------------------------------------------------------- 
+Sub HitObstacle 
+
+   /echo Obstacle hit, moving around it... 
+   /keypress forward 
+   /keypress back hold 
+   /delay 3 
+   /keypress back 
+   /if (${Math.Rand[100]}+1>50) { 
+     /keypress strafe_right hold 
+   } else { 
+     /keypress strafe_left hold 
+   } 
+   /delay 5 
+   /keypress strafe_right 
+   /keypress strafe_left 
+   /keypress forward hold 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: GM Check 
+|-------------------------------------------------------------------------------- 
+Sub GMCheck 
+
+   /if (${Spawn[gm].ID}) { 
+      /beep 
+      /beep 
+      /beep 
+      
+      /echo GM has entered the zone! 
+      /echo FUCK HIM but ending the macro... 
+
+      /keypress forward 
+      /keypress back 
+
+      /quit 
+      /endmacro 
+   } 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Reading from an INI File 
+|-------------------------------------------------------------------------------- 
+Sub ReadINI(FileName,SectionName,ArrayType) 
+
+   /echo Attempting to Read Section "${SectionName}" Zone Information from ${FileName}... 
+   /delay 1s 
+    
+   /if (${Ini[${FileName},${SectionName},-1,NO].Equal[NO]}) { 
+      /echo "${SectionName}" is not a Valid Section for FILE:${FileName}, ending macro... 
+      /delay 1s 
+      /return 
+   } 
+   /declare nValues     int local  1 
+   /declare nArray      int local  0 
+   /declare KeySet      string local  ${Ini[${FileName},${SectionName}]} 
+
+   :CounterLoop 
+   /if (!${KeySet.Arg[${nValues},|].Length}) { 
+      /varcalc nValues ${nValues}-1 
+      /goto :MakeArray 
+   } 
+   /varcalc nValues ${nValues}+1 
+   /goto :CounterLoop  
+
+   :MakeArray 
+   /if (!${nValues}) /return 
+   /if (${FileName.Equal["HunterMob.ini"]}&&${nValues}>0) { 
+      /echo Declaring Mob Array... 
+      /declare RV_MobArray[${nValues}]   string outer 
+      /declare RV_MobStats[${nValues}]   string outer 
+   } 
+   /if (${FileName.Equal["HunterLoot.ini"]}&&${nValues}>0) { 
+      /echo Declaring Loot Array... 
+      /declare RV_LootArray[${nValues}]  string outer 
+      /declare RV_LootStats[${nValues}]  string outer 
+   } 
+   /for nArray 1 to ${nValues} 
+      /if (${FileName.Equal["HunterMob.ini"]}) { 
+         /varset RV_MobArray[${nArray}] ${Ini[${FileName},${SectionName},${ArrayType}${nArray}]} 
+         /varset RV_MobStats[${nArray}] 0 
+      } 
+      /if (${FileName.Equal["HunterLoot.ini"]}) { 
+         /varset RV_LootArray[${nArray}] ${Ini[${FileName},${SectionName},${ArrayType}${nArray}]} 
+         /varset RV_LootStats[${nArray}] 0 
+      } 
+   /next nArray 
+    
+   /echo "${SectionName}" Zone Information Read Successfully from ${FileName}... 
+   /delay 1s 
+    
+/return 
+
+|-------------------------------------------------------------------------------- 
+|SUB: Display Stats 
+|-------------------------------------------------------------------------------- 
+Sub DisplayStats 
+
+   /declare nArray  int local 
+    
+   /if (${Defined[RV_LootArray]}) { 
+      /for nArray 1 to ${RV_LootArray.Size} 
+         /echo ${Int[${RV_LootStats[${nArray}]}]} ${RV_LootArray[${nArray}]}'s 
+      /next nArray 
+   } 
+    
+/return
