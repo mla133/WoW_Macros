@@ -1,0 +1,41 @@
+/stopsong
+  /varset i 1
+   :moveloop
+     /bc [+Y+]Path : [+y+]${CampNum}[+Y+]  Point : [+y+]${i}  [+x+]
+      /squelch /moveto loc ${Path[${CampNum},${i},1]} ${Path[${CampNum},${i},2]}
+     :MoveLoop1
+       /if (${NearestSpawn[1, NPC los radius 180 zradius 30 noalert 1].ID}) {
+         /keypress DOWN
+         /if (${Me.CombatState.Equal[COMBAT]}) /goto :ReturnPath
+         /tar id ${NearestSpawn[1, NPC los radius 180 zradius 30 noalert 1].ID}
+         /delay 2s ${Target.ID}==${NearestSpawn[1, NPC los radius 180 zradius 30 noalert 1].ID}
+         /if (${Target.Distance}>140) {
+           /delay 5s ${Me.AltAbilityReady[Boastful Bellow]}
+           /bc Bellow pull
+           /alt activate 199
+           /delay 6
+         }
+         /cast "Slumber of Kolain Rk. II"
+         /delay 1s
+         /delay 4s ${Me.CombatState.Equal[COMBAT]}
+         /delay 5
+         /echo ${Me.XTarget}
+         /stopsong
+         /if (${Me.XTarget}==2) {
+           /delay 4
+           /if (${Me.XTarget}==2) {
+           /bc Boastful Bellow SS
+           /alt activate 199
+           }
+         }
+         /echo Returning back
+         /goto :ReturnPath
+       }
+     /delay 1
+     /if (!${MoveTo.Stopped}) /goto :MoveLoop1
+  /varcalc i ${i}+1
+ || /echo ${Bool[${Path[${CampNum},${i},1]}]}   ${Path[${CampNum},${i},1]}
+  /if (${Bool[${Path[${CampNum},${i},1]}]}) /goto :moveloop
+  /delay 1s
+  /bc End of Path Encounted - No Aggro
+  /call CampFireBack

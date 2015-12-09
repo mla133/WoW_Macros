@@ -1,0 +1,42 @@
+| Enchanter Macro
+| casts DOT Cripple Slow when in range to pull agro for pet, No AA yet
+| Nukes at 15% target
+| /assist MA Name
+|Casts Arcane Rune automatically
+#turbo 40
+#include spell_routines.inc
+#event RuneFade “The shimmer of runes fades”
+
+Sub Main
+/declare SpellDOT         outer “Strangle”
+/declare SpellCRIPPLE   outer “Cripple”
+/declare SpellSLOW       outer “Shiftless Deeds”
+/declare SpellNUKE        outer “Dementing Visions”
+/declare SpellRUNE        outer “Arcane Rune”
+/declare CharName string outer   EditYourCharacterNameOutOfYourPostAndReplaceThisWithIt
+:loop
+/doevents
+/delay 1m !${Me.Casting.ID}
+/if (!${Target.ID} || ${Target.Type.Equal[PC]} || ${Target.Type.Equal[CORPSE]}) {
+  /assist ${CharName}
+  /delay 10
+  /attack off
+  /if (${Target.Distance}<200) {
+    /call cast ${SpellDOT} gem3 3s
+    /call cast ${SpellCRIPPLE} gem2 25
+    /call cast ${SpellSLOW} gem1 6s
+    /delay 10m ${Target.PctHPs}<15
+    /if (${Target.PctHPs}<15) {
+      /call cast $(SpellNUKE) gem4
+      /if (${Me.Standing} && !${Me.Mount.ID}) /sit
+    }
+  }
+}
+/goto :loop
+/return
+
+|Sub events
+Sub Event_RuneFade
+/call cast $(SpellRUNE)
+/delay 20
+/return

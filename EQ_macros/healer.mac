@@ -1,0 +1,69 @@
+|This macro is for a healer/buffer/following toon whose only job is to follow 2 toons around and heal/buff them
+|It will add the toons to xtarget 4 and 5 and then keep track of their health using those slots...
+
+#turbo 120
+
+Sub Main
+   /declare ToonOne string outer soandso
+   /declare ToonTwo string outer suchandsuch
+   /declare HealSpell string outer "Greater Healing"
+   /if (!${Me.XTarget[${ToonOne}].ID}) {
+      /echo xtarget not set for ${ToonOne}, need it to check HP
+      /xtarget set 4 ${ToonOne}
+      /delay 10
+   }
+   /if (!${Me.XTarget[${ToonTwo}].ID}) {
+      /echo xtarget not set for ${ToonTwo}, need it to check HP
+      /xtarget set 5 ${ToonTwo}
+      /delay 10
+   }
+   :HealLoop
+      |line below sticks to toon 1 at 15 distance and take underwater into account as well
+      /if (!${Stick.Active} {
+         /stick 15 id ${Spawn[=${ToonOne}].ID} uw
+      }
+      |now its time to check heals
+      /call CheckToonHP ToonOne 80
+      /call CheckToonHP ToonTwo 80
+      |want to check buffs as well?
+      /call BuffCheck
+      /delay 1
+   /goto :HealLoop
+/return
+
+Sub CheckToonHP(string Toon,int minhp)
+   /if (${Me.XTarget[${Toon}].PctHPs}<${minhp}) {
+      /delay 5s !${Me.Casting.ID}
+      /call Heal ${Toon}
+   }
+/return
+
+Sub CheckBuffs
+   |check buffs blah blah
+   |code goes here
+/return
+
+Sub Heal(string Healee)
+   /stick off
+   /declare healID int local ${Spawn[=${Healee}].ID}
+:retrytargettoon
+   /if (${Target.ID} && ${Target.ID}==${healID}) {
+      /casting ${HealSpell} -targetid|${healID}
+      /call WaitCast
+      /if (${Cast.Result.NotEqual[CAST_SUCCESS]}) {
+         /goto :retrytargettoon
+      }
+   } else {
+      /target id ${healID}
+      /delay 10 ${Target.ID}==${healID}
+      /goto :retrytargettoon
+   }
+/return
+
+Sub WaitCast
+:rewaitcast
+   /if (${Cast.Status.NotEqual[I]} || ${Me.Casting.ID}) {
+      /delay 1
+      /goto :rewaitcast
+   }
+/return
