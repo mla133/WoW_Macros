@@ -1,7 +1,7 @@
 | Hunter Macro 
 | Hunter.mac 
-| Author      : robdawg 
-| Version     : v1.2 2004-05-13 10:06pm PST 
+| Author      : Matt
+| Version     : v121115_1634
 | Useage      : /macro Hunter 
 | Description : This macro will run your character around killing any mobs in your 
 |      RV_MobArray.  Then it will attempt to loot all items in your 
@@ -255,7 +255,17 @@ Sub SpecialIt
    /declare TempID    int inner  0 
 
    /if ((${Target.Distance}<11)&&(${Me.AbilityReady["Bash"]})) /doability "Bash" 
+   /if ((${Target.Distance}<11)&&(${Me.AbilityReady["Round Kick"]})) /doability "Round Kick" 
+   /if ((${Target.Distance}<11)&&(${Me.AbilityReady["Flying Kick"]})) /doability "Flying Kick" 
+   /if ((${Target.Distance}<11)&&(${Me.AbilityReady["Eagle Strike"]})) /doability "Eagle Strike" 
+   /if ((${Target.Distance}<11)&&(${Me.AbilityReady["Intimidate"]})) /doability "Intimidate" 
     
+   /if ((${Int[${Me.PctHPs}]}<50)&&(${Me.AbilityReady["Mend"]})) {
+      /echo Mending due to low health...
+      /doability "Mend"
+   }
+
+
    /if ((${Int[${Me.PctHPs}]}<50)&&(${Me.Gem["Light of Nife"]})&&(${Me.SpellReady["Light of Nife"]})) { 
       /varset TempID ${Target.ID} 
       /keypress forward 
