@@ -391,11 +391,12 @@ Sub ReadINI(FileName,SectionName,ArrayType)
    /echo Attempting to Read Section "${SectionName}" Zone Information from ${FileName}... 
    /delay 1s 
     
-   /if (${Ini[${FileName},${SectionName},-1,NO].Equal[NO]}) { 
-      /echo "${SectionName}" is not a Valid Section for FILE:${FileName}, ending macro... 
-      /delay 1s 
-      /return 
-   } 
+|   /if (${Ini[${FileName},${SectionName},-1,NO].Equal[NO]}) { 
+|      /echo "${SectionName}" is not a Valid Section for FILE:${FileName}, ending macro... 
+|      /delay 1s 
+|      /return 
+|   } 
+
    /declare nValues     int local  1 
    /declare nArray      int local  0 
    /declare KeySet      string local  ${Ini[${FileName},${SectionName}]} 
